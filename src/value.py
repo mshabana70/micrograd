@@ -6,6 +6,7 @@ class Value:
     def __init__(self, data, _children=(), _op='', label=''):
         """Initialize the value class."""
         self.data = data
+        self.grad = 0.0 # Zero for no effect to loss function
         # Children nodes of the resulting value object
         self._prev = set(_children)
         # Operation that was performed to get the resulting value object

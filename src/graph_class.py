@@ -24,7 +24,7 @@ def draw_dot(root):
         uid = str(id(n))
 
         # for any value in the graph, create a rectangular ('record') node for it
-        dot.node(name = uid, label = "{ %s | data %.4f }" % (n.label, n.data), shape='record')
+        dot.node(name = uid, label = "{ %s | data %.4f | grad %.4f }" % (n.label, n.data, n.grad), shape='record')
 
         if n._op:
             # if the value has an operation, create a circular node for it
@@ -47,8 +47,11 @@ def main():
     e = a * b; e.label = 'e'
     d = e + c; d.label = 'd'
 
-    print(draw_dot(d).source)
-    draw_dot(d).render('img/graph.gv')
+    f = Value(-2.0, label='f')
+    L = d * f; L.label = 'L'
+
+    print(draw_dot(L).source)
+    draw_dot(L).render('img/graph.gv')
     
 
 if __name__ == "__main__":
