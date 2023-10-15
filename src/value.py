@@ -3,13 +3,15 @@ import numpy as np
 
 class Value:
 
-    def __init__(self, data, _children=(), _op = ''):
+    def __init__(self, data, _children=(), _op='', label=''):
         """Initialize the value class."""
         self.data = data
         # Children nodes of the resulting value object
         self._prev = set(_children)
         # Operation that was performed to get the resulting value object
         self._op = _op
+        # Label for the node in the graph
+        self.label = label
 
     def __repr__(self):
         """Return the string representation of the value."""
@@ -29,15 +31,17 @@ class Value:
 def main():
     # Testing Value class
 
-    a = Value(2.0)
-    b = Value(-3.0)
-    c = Value(10.0)
+    a = Value(2.0, label='a')
+    b = Value(-3.0, label='b')
+    c = Value(10.0, label='c')
 
     print(a)
     print(b)
     print(a + b)
     print(a * b)
-    d = a * b + c
+
+    e = a * b; e.label = 'e'
+    d = e + c; d.label = 'd'
     print(d)
     print(d._prev)
     print(d._op)

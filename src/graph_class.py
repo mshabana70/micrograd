@@ -17,20 +17,20 @@ def trace(root):
 
 def draw_dot(root):
 
-    dot = Digraph(format='png', graph_attr={'rankdir': 'LR'}) # LR = left to right
+    dot = Digraph(format='svg', graph_attr={'rankdir': 'LR'}) # LR = left to right
 
     nodes, edges = trace(root)
     for n in nodes:
         uid = str(id(n))
 
         # for any value in the graph, create a rectangular ('record') node for it
-        dot.node(name = uid, label = "{ data %.4f }" % (n.data, ), shape='record')
+        dot.node(name = uid, label = "{ %s | data %.4f }" % (n.label, n.data), shape='record')
 
         if n._op:
             # if the value has an operation, create a circular node for it
-            dot.node(name = uid + 'op', label = n._op, shape='circle')
+            dot.node(name = uid + n._op, label = n._op)
             # create an edge from the operation to the value
-            dot.edge(uid + 'op', uid)
+            dot.edge(uid + n._op, uid)
     
     for n1, n2 in edges:
         # Connect n1 to the op node of n2
@@ -41,12 +41,15 @@ def draw_dot(root):
 
 def main():
 
-    a = Value(2.0)
-    b = Value(-3.0)
-    c = Value(10.0)
-    d = a * b + c
+    a = Value(2.0, label='a')
+    b = Value(-3.0, label='b')
+    c = Value(10.0, label='c')
+    e = a * b; e.label = 'e'
+    d = e + c; d.label = 'd'
 
-    draw_dot(d).render('img/complex_graph.gv', view=True)
+    print(draw_dot(d).source)
+    draw_dot(d).render('img/graph.gv')
+    
 
 if __name__ == "__main__":
     main()
