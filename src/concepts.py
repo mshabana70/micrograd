@@ -45,6 +45,24 @@ def complex_derivative():
     print('d2 ((a + h) * b + c): ', d2)
     print('Slope: ', (d2 - d1) / h)
 
+    # Calculate derivative of d with respect to b
+    a -= h
+    b += h
+    d3 = a * b + c
+
+    print(f"Complex derivative of a = {a}, b = {b}, c = {c} and h = {h}:")
+    print('d3 (a * (b + h) + c): ', d3)
+    print('Slope: ', (d3 - d1) / h)
+
+    # Calculate derivative of d with respect to c
+    b -= h
+    c += h
+    d4 = a * b + c
+
+    print(f"Complex derivative of a = {a}, b = {b}, c = {c} and h = {h}:")
+    print('d4 (a * b + (c + h)): ', d4)
+    print('Slope: ', (d4 - d1) / h)
+
 def main():
     # Scalar muliplication f(x)
     print(f(3.0))
