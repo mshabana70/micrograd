@@ -24,13 +24,26 @@ def derivative(x, h):
 
 def complex_derivative():
     """Function that calculates the derivative programatically with multiple inputs."""
+    h = 0.0001
+
+    # Inputs
     a = 2.0
     b = -3.0
     c = 10.0
-    d = a * b + c
 
-    print("Complex derivative of a = {a}, b = {b}, c = {c}:")
-    print(d)
+    # Calculate derivative of d for all a, b, and c
+    d1 = a * b + c
+
+    print(f"Complex derivative of a = {a}, b = {b}, c = {c}:")
+    print('d1 (a * b + c): ', d1)
+
+    # Calculate derivative of d with respect to a
+    a += h
+    d2 = a * b + c
+
+    print(f"Complex derivative of a = {a}, b = {b}, c = {c} and h = {h}:")
+    print('d2 ((a + h) * b + c): ', d2)
+    print('Slope: ', (d2 - d1) / h)
 
 def main():
     # Scalar muliplication f(x)
