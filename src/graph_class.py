@@ -46,7 +46,7 @@ def main():
     c = Value(10.0)
     d = a * b + c
 
-    draw_dot(d).save('graph.png')
+    draw_dot(d).render('img/complex_graph.gv', view=True)
 
 if __name__ == "__main__":
     main()
